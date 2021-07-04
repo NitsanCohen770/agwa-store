@@ -1,6 +1,6 @@
 import Product from '../models/product';
 
-const products = [
+const PRODUCTS = [
   new Product(
     'lettuce_salanova_gaugen',
     'Lettuce - Salanova Gaugen',
@@ -22,3 +22,5 @@ const products = [
     34
   ),
 ];
+
+export default PRODUCTS;

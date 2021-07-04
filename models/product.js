@@ -1,21 +1,19 @@
-class Product {
+export default class Product {
   constructor(
     id,
-    agwaDeviceId,
     name,
     imageUrl,
     seedToCrop,
-    yield,
+    yieldValue,
     lifeCycle,
     description,
     price
   ) {
     this.id = id;
-    this.agwaDeviceId = agwaDeviceId;
     this.name = name;
     this.imageUrl = imageUrl;
     this.seedToCrop = seedToCrop;
-    this.yield = yield;
+    this.yieldValue = yieldValue;
     this.lifeCycle = lifeCycle;
     this.description = description;
     this.price = price;
