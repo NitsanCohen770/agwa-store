@@ -33,7 +33,7 @@ const ProductItem = ({ image, name, price, onAddToCart, onShowDetails }) => {
             style={styles.button}
             color={Colors.blue}
             title='Add to Cart'
-            onPress={onAddToCart}
+            onPress={() => onAddToCart(amount)}
           />
           <View style={styles.quantity}>
             <TextInput

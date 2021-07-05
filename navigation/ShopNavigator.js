@@ -14,12 +14,7 @@ const ProductsStackNavigator = createStackNavigator();
 
 const defaultNavigationOptions = {
   headerTitle: 'Online Store',
-  headerLeft: () => (
-    <Image
-      style={{ width: 40, height: 40, marginLeft: 10 }}
-      source={require('../assets/agwa_logo@3x.png')}
-    />
-  ),
+
   headerTitleStyle: {
     fontFamily: 'fira-sans-bold',
   },
@@ -38,10 +33,10 @@ const defaultNavigationOptions = {
 };
 
 export const ProductsNavigator = props => {
-  const [assets] = useAssets(require('../assets/agwa_logo@3x.png'));
-  if (!assets) {
-    return <AppLoading />;
-  }
+  // const [assets] = useAssets(require('../assets/agwa_logo@3x.png'));
+  // if (!assets) {
+  //   return <AppLoading />;
+  // }
   return (
     <ProductsStackNavigator.Navigator screenOptions={defaultNavigationOptions}>
       <ProductsStackNavigator.Screen
