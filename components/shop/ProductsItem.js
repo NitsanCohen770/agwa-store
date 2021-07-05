@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
 import {
   View,
   Text,
@@ -7,12 +7,17 @@ import {
   StyleSheet,
   Button,
   TextInput,
-  Pressable,
+  TouchableOpacity,
 } from 'react-native';
+import Colors from '../../constants/Colors';
+import { useState } from 'react';
 
 const ProductItem = ({ image, name, price, onAddToCart, onShowDetails }) => {
+  const [amount, setAmount] = useState(1);
+  const [inputText, setInputText] = useState('Enter desired amount');
+
   return (
-    <Pressable onPress={onShowDetails}>
+    <TouchableOpacity onPress={onShowDetails}>
       <View style={styles.product}>
         <Image
           style={styles.image}
@@ -26,6 +31,7 @@ const ProductItem = ({ image, name, price, onAddToCart, onShowDetails }) => {
         <View style={styles.cartActions}>
           <Button
             style={styles.button}
+            color={Colors.blue}
             title='Add to Cart'
             onPress={onAddToCart}
           />
@@ -33,15 +39,16 @@ const ProductItem = ({ image, name, price, onAddToCart, onShowDetails }) => {
             <TextInput
               textAlign='center'
               keyboardType='numeric'
-              defaultValue={1}
-              editable={false}
-              inlineImageLeft={<Icon name='ios-book' color='#4F8EF7' />}
+              defaultValue={inputText}
+              onTextInput={event => setAmount(event.target.value)}
+              onFocus={() => setInputText('')}
+              style={styles.quantity}
+              // editable={false}
             />
-            <Icon name='plus' />
           </View>
         </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
@@ -59,20 +66,20 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: '60%',
+    height: '50%',
   },
   name: {
+    fontFamily: 'fira-sans-bold',
     fontSize: 18,
     marginVertical: 4,
-    display: 'flex',
-    justifyContent: 'center',
+    textAlign: 'center',
     marginBottom: 5,
   },
   price: {
+    fontFamily: 'fira-sans',
     fontSize: 14,
     color: '#888',
-    display: 'flex',
-    justifyContent: 'center',
+    textAlign: 'center',
     marginBottom: 10,
   },
   cartActions: {
@@ -85,6 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: { marginBottom: 20 },
+  icon: { display: 'flex' },
 });
 
 export default ProductItem;

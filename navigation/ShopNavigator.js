@@ -1,34 +1,64 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { ProductOverviewScreenOptions } from '../screens/shop/ProductOverviewScreen';
+import { ProductDetailScreenOptions } from '../screens/shop/ProductDetailScreen';
 import ProductsOverviewScreen from '../screens/shop/ProductOverviewScreen';
-import Icon from 'react-native-vector-icons/Ionicons';
+import ProductsDetailScreen from '../screens/shop/ProductDetailScreen';
+import AppLoading from 'expo-app-loading';
+import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../constants/Colors';
-import { Platform } from 'react-native';
+import { useAssets } from 'expo-asset';
+import { StyleSheet, Image } from 'react-native';
 
 const ProductsStackNavigator = createStackNavigator();
 
 const defaultNavigationOptions = {
-  headerTitle: 'Agwa-Farm Online Store',
-  headerLeft: () => <Icon name='ios-book' color='#4F8EF7' />,
-  headerRight: () => <Icon name='ios-book' color='#4F8EF7' />,
-  headerStyle: {
-    backgroundColor: Colors.primary,
+  headerTitle: 'Online Store',
+  headerLeft: () => (
+    <Image
+      style={{ width: 40, height: 40, marginLeft: 10 }}
+      source={require('../assets/agwa_logo@3x.png')}
+    />
+  ),
+  headerTitleStyle: {
+    fontFamily: 'fira-sans-bold',
   },
-  headerTintColor: 'white',
+  headerRight: () => (
+    <Icon
+      name='shoppingcart'
+      color={Colors.blue}
+      size={30}
+      style={styles.icon}
+    />
+  ),
+  headerStyle: {
+    backgroundColor: 'white',
+  },
+  headerTintColor: Colors.fontColor,
 };
 
-const ProductsNavigator = props => {
+export const ProductsNavigator = props => {
+  const [assets] = useAssets(require('../assets/agwa_logo@3x.png'));
+  if (!assets) {
+    return <AppLoading />;
+  }
   return (
-    <NavigationContainer>
-      <ProductsStackNavigator.Navigator
-        screenOptions={defaultNavigationOptions}>
-        <ProductsStackNavigator.Screen
-          name='ProductsOverview'
-          component={ProductsOverviewScreen}
-        />
-      </ProductsStackNavigator.Navigator>
-    </NavigationContainer>
+    <ProductsStackNavigator.Navigator screenOptions={defaultNavigationOptions}>
+      <ProductsStackNavigator.Screen
+        name='ProductsOverview'
+        component={ProductsOverviewScreen}
+        options={ProductOverviewScreenOptions}
+      />
+      <ProductsStackNavigator.Screen
+        name='ProductDetailScreen'
+        component={ProductsDetailScreen}
+        options={ProductDetailScreenOptions}
+      />
+      <ProductsStackNavigator.Screen
+        name='Cart'
+        component={ProductsDetailScreen}
+      />
+    </ProductsStackNavigator.Navigator>
   );
 };
 
@@ -45,5 +75,8 @@ const ProductsNavigator = props => {
 //     },
 //   }
 // );
-
+const styles = StyleSheet.create({
+  icon: { marginRight: 10 },
+  IconTree: { marginLeft: 10 },
+});
 export default ProductsNavigator;
