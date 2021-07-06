@@ -9,14 +9,20 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../constants/Colors';
 import { useAssets } from 'expo-asset';
 import { StyleSheet, Image } from 'react-native';
+import CartScreen from '../screens/shop/CartScreen';
 
 const ProductsStackNavigator = createStackNavigator();
 
 const defaultNavigationOptions = {
   headerTitle: 'Online Store',
-
+  // headerLeft: () => (
+  //   <Image
+  //     style={{ width: 40, height: 40, marginLeft: 10 }}
+  //     source={require('../assets/agwa_logo@3x.png')}
+  //   />
+  // ),
   headerTitleStyle: {
-    fontFamily: 'fira-sans-bold',
+    fontFamily: 'FiraSans_700Bold',
   },
   headerRight: () => (
     <Icon
@@ -49,10 +55,7 @@ export const ProductsNavigator = props => {
         component={ProductsDetailScreen}
         options={ProductDetailScreenOptions}
       />
-      <ProductsStackNavigator.Screen
-        name='Cart'
-        component={ProductsDetailScreen}
-      />
+      <ProductsStackNavigator.Screen name='Cart' component={CartScreen} />
     </ProductsStackNavigator.Navigator>
   );
 };

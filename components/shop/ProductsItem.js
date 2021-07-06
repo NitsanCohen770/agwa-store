@@ -1,5 +1,4 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/Entypo';
 import {
   View,
   Text,
@@ -13,8 +12,7 @@ import Colors from '../../constants/Colors';
 import { useState } from 'react';
 
 const ProductItem = ({ image, name, price, onAddToCart, onShowDetails }) => {
-  const [amount, setAmount] = useState(1);
-  const [inputText, setInputText] = useState('Enter desired amount');
+  const [quantity, setQuantity] = useState('Tap to change amount');
 
   return (
     <TouchableOpacity onPress={onShowDetails}>
@@ -33,17 +31,24 @@ const ProductItem = ({ image, name, price, onAddToCart, onShowDetails }) => {
             style={styles.button}
             color={Colors.blue}
             title='Add to Cart'
-            onPress={() => onAddToCart(amount)}
+            onPress={() => {
+              let defaultQuantity;
+              if (isNaN(quantity)) {
+                defaultQuantity = 1;
+              }
+              onAddToCart(defaultQuantity || quantity);
+            }}
           />
           <View style={styles.quantity}>
             <TextInput
               textAlign='center'
               keyboardType='numeric'
-              defaultValue={inputText}
-              onTextInput={event => setAmount(event.target.value)}
-              onFocus={() => setInputText('')}
+              defaultValue={quantity}
+              onChange={event => {
+                setQuantity(parseInt(event.target.value));
+              }}
+              onFocus={() => setQuantity(1)}
               style={styles.quantity}
-              // editable={false}
             />
           </View>
         </View>
@@ -69,14 +74,15 @@ const styles = StyleSheet.create({
     height: '50%',
   },
   name: {
-    fontFamily: 'fira-sans-bold',
+    fontFamily: 'FiraSans_700Bold',
     fontSize: 18,
     marginVertical: 4,
     textAlign: 'center',
     marginBottom: 5,
+    color: Colors.lightGreen,
   },
   price: {
-    fontFamily: 'fira-sans',
+    fontFamily: 'FiraSans_400Regular',
     fontSize: 14,
     color: '#888',
     textAlign: 'center',
@@ -90,6 +96,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: 5,
   },
   button: { marginBottom: 20 },
   icon: { display: 'flex' },

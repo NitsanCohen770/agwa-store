@@ -2,6 +2,7 @@ import * as cartActionTypes from '../actions/cartActionTypes';
 import CartItem from '../../models/cart-item';
 
 const initialState = {
+  currentDevice: 'deviceA',
   deviceA: {
     items: {},
     totalAmount: 0,
@@ -38,15 +39,17 @@ export default (state = initialState, action) => {
               ...state[chosenDevice].items,
               [addedProduct.id]: updatedCartItem,
             },
+            totalAmount:
+              state[chosenDevice].totalAmount +
+              productPrice * quantityToBeAdded,
           },
-          totalAmount: state.totalAmount + productPrice * quantityToBeAdded,
         };
       } else {
         const newCartItem = new CartItem(
-          1,
+          quantityToBeAdded,
           productPrice,
           productName,
-          productPrice
+          productPrice * quantityToBeAdded
         );
         return {
           ...state,
@@ -56,8 +59,10 @@ export default (state = initialState, action) => {
               ...state[chosenDevice].items,
               [addedProduct.id]: newCartItem,
             },
+            totalAmount:
+              state[chosenDevice].totalAmount +
+              productPrice * quantityToBeAdded,
           },
-          totalAmount: state.totalAmount + productPrice * quantityToBeAdded,
         };
       }
   }
