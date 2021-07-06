@@ -23,7 +23,7 @@ const CartScreen = () => {
   const cartTotalAmount = useSelector(
     state => state.cart[currentDevice].totalAmount
   );
-  console.log(cartItems);
+
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
@@ -76,4 +76,7 @@ const styles = StyleSheet.create({
   amount: { color: Colors.lightGreen },
 });
 
+export const CartScreenOptions = () => {
+  return { headerTitle: 'Cart' };
+};
 export default CartScreen;

@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import {
   useFonts,
   FiraSans_400Regular,
@@ -18,8 +19,12 @@ const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
 });
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 export default function App() {
   const [loaded] = useFonts({

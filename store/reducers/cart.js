@@ -65,6 +65,37 @@ export default (state = initialState, action) => {
           },
         };
       }
+    case cartActionTypes.DECREMENT_FROM_CART:
+      const productId = action.product;
+      const selectedDevice = action.device;
+      const selectedCartItem = state[selectedDevice].items[productId];
+
+      const currentQuantity = selectedCartItem.quantity;
+      let updatedCartItems;
+      if (currentQuantity > 1) {
+        const updatedCartItem = new CartItem(
+          selectedCartItem.quantity - 1,
+          selectedCartItem.price,
+          selectedCartItem.name,
+          selectedCartItem.sum - selectedCartItem.price
+        );
+        updatedCartItems = {
+          ...state[selectedDevice].items,
+          [productId]: updatedCartItem,
+        };
+      } else {
+        updatedCartItems = { ...state[selectedDevice].items };
+        delete updatedCartItems[productId];
+      }
+      return {
+        ...state,
+        [selectedDevice]: {
+          ...state[selectedDevice],
+          items: updatedCartItems,
+          totalAmount:
+            state[selectedDevice].totalAmount - selectedCartItem.price,
+        },
+      };
   }
   return state;
 };

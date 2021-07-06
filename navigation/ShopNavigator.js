@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ProductOverviewScreenOptions } from '../screens/shop/ProductOverviewScreen';
 import { ProductDetailScreenOptions } from '../screens/shop/ProductDetailScreen';
+import { CartScreenOptions } from '../screens/shop/CartScreen';
 import ProductsOverviewScreen from '../screens/shop/ProductOverviewScreen';
 import ProductsDetailScreen from '../screens/shop/ProductDetailScreen';
 import AppLoading from 'expo-app-loading';
@@ -55,24 +56,15 @@ export const ProductsNavigator = props => {
         component={ProductsDetailScreen}
         options={ProductDetailScreenOptions}
       />
-      <ProductsStackNavigator.Screen name='Cart' component={CartScreen} />
+      <ProductsStackNavigator.Screen
+        name='Cart'
+        component={CartScreen}
+        options={CartScreenOptions}
+      />
     </ProductsStackNavigator.Navigator>
   );
 };
 
-// const ProductsNavigator = createStackNavigator(
-//   {
-//     ProductsOverview: ProductsOverviewScreen,
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerStyle: {
-//         backgroundColor: Platform.OS === 'android' ? Colors.primary : '',
-//       },
-//       headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary,
-//     },
-//   }
-// );
 const styles = StyleSheet.create({
   icon: { marginRight: 10 },
   IconTree: { marginLeft: 10 },

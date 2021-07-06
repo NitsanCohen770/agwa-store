@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import * as cartActions from '../../store/actions/';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import CartHeaderButton from '../../components/UI/HeaderButton';
 import Colors from '../../constants/Colors';
 
 const ProductDetailScreen = ({ route: { params }, navigation }) => {
@@ -27,7 +29,7 @@ const ProductDetailScreen = ({ route: { params }, navigation }) => {
         resizeMode='cover'
         style={styles.image}
         source={{
-          uri: `https://dev-agwa-public-static-assets-web.s3-us-west-2.amazonaws.com/images/vegetables/${selectedProduct.imageUrl}@3x.jpg`,
+          uri: `https://dev-agwa-public-static-assets-web.s3-us-west-2.amazonaws.com/images/vegetables/${selectedProduct.imageId}@3x.jpg`,
         }}
       />
       <View style={styles.button}>
@@ -73,7 +75,7 @@ const ProductDetailScreen = ({ route: { params }, navigation }) => {
         <View>
           <Text style={styles.details}>
             <Text style={styles.boldText}> Yield Value:</Text>{' '}
-            {selectedProduct.yieldValue}.
+            {selectedProduct.yield}.
           </Text>
         </View>
         <View>
@@ -89,6 +91,17 @@ const ProductDetailScreen = ({ route: { params }, navigation }) => {
 export const ProductDetailScreenOptions = navData => {
   return {
     headerTitle: navData.route.params.name,
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CartHeaderButton}>
+        <Item
+          title='Cart'
+          iconName='md-cart'
+          onPress={() => {
+            navData.navigation.navigate('Cart');
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 const styles = StyleSheet.create({

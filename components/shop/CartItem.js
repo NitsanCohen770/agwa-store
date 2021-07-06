@@ -7,10 +7,13 @@ import * as cartActions from '../../store/actions';
 const CartItem = ({ quantity, name, sum, productId }) => {
   const dispatch = useDispatch();
   const currentDevice = useSelector(state => state.cart.currentDevice);
+  const currentQuantity = useSelector(
+    state => state.cart[currentDevice].items[productId].quantity
+  );
   const product = useSelector(state =>
     state.products.availableProducts.find(product => product.id === productId)
   );
-  console.log(product);
+  console.log(currentQuantity);
   return (
     <View style={style.cartItem}>
       <View style={style.itemData}>
@@ -19,8 +22,16 @@ const CartItem = ({ quantity, name, sum, productId }) => {
       </View>
       <View style={style.itemData}>
         <Text style={style.mainText}>{sum} NIS</Text>
-        <TouchableOpacity style={style.buttons}>
-          <FontAwesome name='minus-square-o' size={24} color='black' />
+        <TouchableOpacity
+          style={style.buttons}
+          onPress={() =>
+            dispatch(cartActions.decrementFromCart(product.id, currentDevice))
+          }>
+          {currentQuantity > 1 ? (
+            <FontAwesome name='minus-square-o' size={24} color='black' />
+          ) : (
+            <FontAwesome name='minus-square-o' size={24} color='red' />
+          )}
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
