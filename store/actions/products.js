@@ -19,9 +19,14 @@ export const fetchProducts = () => {
       })
       .then(res =>
         axios(
-          'https://thingproxy.freeboard.io/fetch/https://dev-agwa-public-static-assets-web.s3-us-west-2.amazonaws.com/data/catalogs/plants.json'
+          'https://thingproxy.freeboard.io/fetch/https://dev-agwa-public-static-assets-web.s3-us-west-2.amazonaws.com/data/catalogs/agwafarm.json'
         ).then(res => {
-          console.log(res.data);
+          const categories = res.data.categories;
+
+          dispatch({
+            type: productsActionTypes.SET_CATAGORIES,
+            categories,
+          });
         })
       );
   };

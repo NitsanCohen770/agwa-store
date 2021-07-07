@@ -1,4 +1,3 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const DECREMENT_FROM_CART = 'DECREMENT_FROM_CART';
-export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const CHOOSE_DEVICE = 'CHOOSE_DEVICE';

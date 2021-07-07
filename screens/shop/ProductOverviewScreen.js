@@ -10,11 +10,21 @@ import CartHeaderButton from '../../components/UI/HeaderButton';
 import ChooseDevicePopup from '../../components/UI/ChooseDevicePopup';
 import { useState } from 'react';
 
-const ProductsOverviewScreen = ({ navigation }) => {
-  const products = useSelector(state => state.products.availableProducts);
+const ProductsOverviewScreen = ({ navigation, categoryProducts }) => {
+  let products = useSelector(state => state.products.availableProducts);
   const dispatch = useDispatch();
+  if (categoryProducts) {
+    products = products.filter(planet1 => {
+      return categoryProducts.some(planet2 => {
+        return planet1.id === planet2.id;
+      });
+    });
+  }
 
   useEffect(() => {
+    if (categoryProducts) {
+      return;
+    }
     dispatch(productActions.fetchProducts());
     return () => {};
   }, [dispatch]);
@@ -44,7 +54,7 @@ const ProductsOverviewScreen = ({ navigation }) => {
   );
 };
 export const ProductOverviewScreenOptions = navData => {
-  const [togglePopup, setTogglePopup] = useState(true);
+  const [togglePopup, setTogglePopup] = useState(false);
 
   return {
     headerTitle: 'All Products',

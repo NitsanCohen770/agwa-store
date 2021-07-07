@@ -62,12 +62,12 @@ const style = StyleSheet.create({
     marginRight: 10,
   },
   quantity: {
-    fontFamily: 'open-sans',
+    fontFamily: 'FiraSans_700Regular',
     color: '#888',
     fontSize: 16,
     marginRight: 10,
   },
-  mainText: { fontFamily: 'open-sans-bold', fontSize: 16 },
+  mainText: { fontFamily: 'FiraSans_700Bold', fontSize: 16 },
   buttons: { marginLeft: 20 },
 });
 

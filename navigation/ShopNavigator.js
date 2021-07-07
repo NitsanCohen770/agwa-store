@@ -5,23 +5,19 @@ import { ProductDetailScreenOptions } from '../screens/shop/ProductDetailScreen'
 import { CartScreenOptions } from '../screens/shop/CartScreen';
 import ProductsOverviewScreen from '../screens/shop/ProductOverviewScreen';
 import ProductsDetailScreen from '../screens/shop/ProductDetailScreen';
-import AppLoading from 'expo-app-loading';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../constants/Colors';
+import { differenceWith } from 'lodash';
 import { useAssets } from 'expo-asset';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, FlatList } from 'react-native';
 import CartScreen from '../screens/shop/CartScreen';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useSelector } from 'react-redux';
 
 const ProductsStackNavigator = createStackNavigator();
 
 const defaultNavigationOptions = {
   headerTitle: 'Online Store',
-  // headerLeft: () => (
-  //   <Image
-  //     style={{ width: 40, height: 40, marginLeft: 10 }}
-  //     source={require('../assets/agwa_logo@3x.png')}
-  //   />
-  // ),
   headerTitleStyle: {
     fontFamily: 'FiraSans_700Bold',
   },
@@ -40,10 +36,6 @@ const defaultNavigationOptions = {
 };
 
 export const ProductsNavigator = props => {
-  // const [assets] = useAssets(require('../assets/agwa_logo@3x.png'));
-  // if (!assets) {
-  //   return <AppLoading />;
-  // }
   return (
     <ProductsStackNavigator.Navigator screenOptions={defaultNavigationOptions}>
       <ProductsStackNavigator.Screen
@@ -65,8 +57,39 @@ export const ProductsNavigator = props => {
   );
 };
 
+const ShopDrawerNavigator = createDrawerNavigator();
+
+export const ShopNavigator = () => {
+  const categories = useSelector(state => state.products.categories);
+  const allProducts = useSelector(state => state.products.categories);
+  console.log(categories);
+  return (
+    <ShopDrawerNavigator.Navigator>
+      <ShopDrawerNavigator.Screen
+        name='All products'
+        component={ProductsNavigator}
+        options={{
+          drawerIcon: props => (
+            <Icon name='barchart' size={23} color={props.color} />
+          ),
+        }}
+      />
+      {categories &&
+        categories.map(category => (
+          <ShopDrawerNavigator.Screen key={category.id} name={category.name}>
+            {props => (
+              <ProductsOverviewScreen
+                {...props}
+                categoryProducts={category.plants}
+              />
+            )}
+          </ShopDrawerNavigator.Screen>
+        ))}
+    </ShopDrawerNavigator.Navigator>
+  );
+};
+
 const styles = StyleSheet.create({
   icon: { marginRight: 10 },
-  IconTree: { marginLeft: 10 },
 });
 export default ProductsNavigator;
