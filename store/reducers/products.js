@@ -1,8 +1,7 @@
-import PRODUCTS from '../../data/data';
 import { SET_PRODUCTS } from '../actions/cartActionTypes';
 
 const initialState = {
-  availableProducts: PRODUCTS,
+  availableProducts: null,
 };
 
 export default (state = initialState, action) => {

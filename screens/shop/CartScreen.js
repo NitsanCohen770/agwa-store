@@ -28,7 +28,8 @@ const CartScreen = () => {
     <View style={styles.screen}>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
-          Total: <Text style={styles.amount}>${cartTotalAmount} NIS</Text>
+          Total:{' '}
+          <Text style={styles.amount}>${cartTotalAmount.toFixed(2)} NIS</Text>
         </Text>
         <Button
           disabled={cartTotalAmount === 0}

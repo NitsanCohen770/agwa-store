@@ -21,7 +21,7 @@ const CartItem = ({ quantity, name, sum, productId }) => {
         <Text style={style.mainText}>{name}</Text>
       </View>
       <View style={style.itemData}>
-        <Text style={style.mainText}>{sum} NIS</Text>
+        <Text style={style.mainText}>{sum.toFixed(2)} NIS</Text>
         <TouchableOpacity
           style={style.buttons}
           onPress={() =>

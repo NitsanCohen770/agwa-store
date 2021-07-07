@@ -94,6 +94,7 @@ export const ProductDetailScreenOptions = navData => {
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CartHeaderButton}>
         <Item
+          color={Colors.lightBlue}
           title='Cart'
           iconName='md-cart'
           onPress={() => {
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     color: Colors.lightGreen,
-    marginHorizontal: 10,
+    marginHorizontal: 40,
   },
   moreDetails: {
     textAlign: 'center',

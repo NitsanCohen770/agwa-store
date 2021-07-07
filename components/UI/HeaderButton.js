@@ -3,13 +3,13 @@ import { HeaderButton } from 'react-navigation-header-buttons';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../constants/Colors';
 
-const CartHeaderButton = props => {
+const CartHeaderButton = ({ color, ...props }) => {
   return (
     <HeaderButton
       {...props}
       IconComponent={Ionicons}
       iconSize={30}
-      color={Colors.blue}
+      color={Colors[color]}
     />
   );
 };

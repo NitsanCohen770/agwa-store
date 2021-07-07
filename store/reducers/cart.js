@@ -96,6 +96,11 @@ export default (state = initialState, action) => {
             state[selectedDevice].totalAmount - selectedCartItem.price,
         },
       };
+    case cartActionTypes.CHOOSE_DEVICE:
+      return {
+        ...state,
+        currentDevice: action.selectedDevice,
+      };
   }
   return state;
 };

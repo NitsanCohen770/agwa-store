@@ -7,3 +7,7 @@ export const addToCart = (product, quantity, device) => {
 export const decrementFromCart = (product, device) => {
   return { type: cartActionTypes.DECREMENT_FROM_CART, product, device };
 };
+
+export const chooseDevice = selectedDevice => {
+  return { type: cartActionTypes.CHOOSE_DEVICE, selectedDevice };
+};
