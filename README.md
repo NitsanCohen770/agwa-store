@@ -28,7 +28,7 @@ Functional Requirements
 
 ### Screenshot
 
-![](./ScreenShot.gif)
+![Screenshot](./ScreenShot.gif)
 
 ### Links
 
