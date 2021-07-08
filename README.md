@@ -28,7 +28,7 @@ Functional Requirements
 
 ### Screenshot
 
-![Screenshot](./ScreenShot.gif)
+![Screenshot](https://github.com/NitsanCohen770/agwa-store/blob/main/ScreenShot.gif)
 
 ### Links
 
