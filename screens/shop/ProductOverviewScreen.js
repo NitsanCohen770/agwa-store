@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { FlatList, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import ProductItem from '../../components/shop/ProductsItem';
 import * as cartActions from '../../store/actions/';
 import * as productActions from '../../store/actions/';
@@ -12,13 +11,13 @@ import { useState } from 'react';
 
 const ProductsOverviewScreen = ({ navigation, categoryProducts }) => {
   let products = useSelector(state => state.products.availableProducts);
+  let currentDevice = useSelector(state => state.cart.currentDevice);
+  console.log(currentDevice);
   const dispatch = useDispatch();
   if (categoryProducts) {
-    products = products.filter(planet1 => {
-      return categoryProducts.some(planet2 => {
-        return planet1.id === planet2.id;
-      });
-    });
+    products = products.filter(plant1 =>
+      categoryProducts.some(plant2 => plant1.id === plant2.id)
+    );
   }
 
   useEffect(() => {
@@ -45,7 +44,9 @@ const ProductsOverviewScreen = ({ navigation, categoryProducts }) => {
               })
             }
             onAddToCart={amount =>
-              dispatch(cartActions.addToCart(itemData.item, amount, 'deviceA'))
+              dispatch(
+                cartActions.addToCart(itemData.item, amount, currentDevice)
+              )
             }
           />
         )}

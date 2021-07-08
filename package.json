@@ -23,6 +23,8 @@
   "dependencies": {
     "@expo-google-fonts/fira-sans": "^0.2.0",
     "@expo/vector-icons": "^12.0.5",
+    "@react-native-async-storage/async-storage": "^1.15.5",
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "0.1.11",
     "@react-navigation/drawer": "^5.12.5",
     "@react-navigation/native": "^5.9.4",
@@ -49,6 +51,8 @@
     "react-navigation-header-buttons": "^7.0.1",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
+    "redux-persist": "^6.0.0",
+    "redux-persist-expo-filesystem": "^2.0.0",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {

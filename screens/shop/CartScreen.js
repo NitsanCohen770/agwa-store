@@ -17,7 +17,9 @@ const CartScreen = () => {
         sum: state.cart[currentDevice].items[key].sum,
       });
     }
-    return transformedCartItems;
+    return transformedCartItems.sort((a, b) =>
+      a.productId > b.productId ? 1 : -1
+    );
   });
 
   const cartTotalAmount = useSelector(

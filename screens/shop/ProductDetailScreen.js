@@ -22,7 +22,8 @@ const ProductDetailScreen = ({ route: { params }, navigation }) => {
   const selectedProduct = useSelector(state =>
     state.products.availableProducts.find(product => product.id === productId)
   );
-  console.log(selectedProduct.imageUrl);
+  const currentDevice = useSelector(state => state.cart.currentDevice);
+
   return (
     <ScrollView>
       <Image
@@ -45,7 +46,7 @@ const ProductDetailScreen = ({ route: { params }, navigation }) => {
               cartActions.addToCart(
                 selectedProduct,
                 defaultQuantity || quantity,
-                'deviceA'
+                currentDevice
               )
             );
           }}

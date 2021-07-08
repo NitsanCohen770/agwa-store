@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import * as cartActions from '../../store/actions';
+import Colors from '../../constants/Colors';
 
 const CartItem = ({ quantity, name, sum, productId }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const CartItem = ({ quantity, name, sum, productId }) => {
         <Text style={style.mainText}>{name}</Text>
       </View>
       <View style={style.itemData}>
-        <Text style={style.mainText}>{sum.toFixed(2)} NIS</Text>
+        <Text style={style.sumText}>{sum.toFixed(2)} NIS</Text>
         <TouchableOpacity
           style={style.buttons}
           onPress={() =>
@@ -52,8 +53,9 @@ const style = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: 'white',
-    justifyContent: 'center',
-    marginHorizontal: 20,
+    justifyContent: 'space-between',
+    marginHorizontal: 'auto',
+    marginVertical: 15,
     width: 350,
   },
   itemData: {
@@ -62,12 +64,17 @@ const style = StyleSheet.create({
     marginRight: 10,
   },
   quantity: {
-    fontFamily: 'FiraSans_700Regular',
+    fontFamily: 'FiraSans_400Regular',
     color: '#888',
     fontSize: 16,
     marginRight: 10,
   },
-  mainText: { fontFamily: 'FiraSans_700Bold', fontSize: 16 },
+  mainText: {
+    fontFamily: 'FiraSans_700Bold',
+    fontSize: 16,
+    color: 'black',
+  },
+  sumText: { color: Colors.fontColor },
   buttons: { marginLeft: 20 },
 });
 
